@@ -39,13 +39,13 @@ namespace Tests
             List<Pnl> capitals = new List<Pnl>()
             {
                 new Pnl(){ Date=new DateTime(2010, 1, 1), Amount= 1000 },
-                new Pnl(){ Date=new DateTime(2010, 1, 1), Amount= -200 },
+                new Pnl(){ Date=new DateTime(2010, 1, 2), Amount= -200 },
                 new Pnl(){ Date=new DateTime(2010, 2, 1), Amount= 2000 },
-                new Pnl(){ Date=new DateTime(2010, 2, 1), Amount= -3000 },
+                new Pnl(){ Date=new DateTime(2010, 2, 2), Amount= -3000 },
                 new Pnl(){ Date=new DateTime(2010, 3, 1), Amount= 500 },
-                new Pnl(){ Date=new DateTime(2010, 3, 1), Amount= -2500 },
+                new Pnl(){ Date=new DateTime(2010, 3, 2), Amount= -2500 },
                 new Pnl(){ Date=new DateTime(2010, 4, 1), Amount= 600 },
-                new Pnl(){ Date=new DateTime(2010, 4, 1), Amount= -100 },
+                new Pnl(){ Date=new DateTime(2010, 4, 2), Amount= -100 },
             };
             strategy.Pnls = capitals;
 
@@ -56,21 +56,16 @@ namespace Tests
             var keys = result.Keys.OrderBy(k => k.Date).ToList();
 
             //Assert
-            Assert.That(result[keys.ElementAt(0)], Is.EqualTo(800));
-            Assert.That(result[keys.ElementAt(1)], Is.EqualTo(-200));
-            Assert.That(result[keys.ElementAt(2)], Is.EqualTo(-2200));
-            Assert.That(result[keys.ElementAt(3)], Is.EqualTo(-1700));
+            Assert.That(result[keys.ElementAt(0)], Is.EqualTo(1000));
+            Assert.That(result[keys.ElementAt(1)], Is.EqualTo(800));
+            Assert.That(result[keys.ElementAt(2)], Is.EqualTo(2800));
+            Assert.That(result[keys.ElementAt(3)], Is.EqualTo(-200));
+            Assert.That(result[keys.ElementAt(4)], Is.EqualTo(300));
+            Assert.That(result[keys.ElementAt(5)], Is.EqualTo(-2200));
+            Assert.That(result[keys.ElementAt(6)], Is.EqualTo(-1600));
+            Assert.That(result[keys.ElementAt(7)], Is.EqualTo(-1700));
+
 
         }
-
-        /*
-            MORE TESTS:
-            Multiple strategies
-            Fail conditions
-            Incorrect commands
-            Incorrect params
-            Nothing found in database
-            Stuff
-        */
     }
 }

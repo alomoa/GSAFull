@@ -15,36 +15,11 @@ namespace GSAFull.utils
                 cumulativeStrategy.StratName = strategy.StratName;
 
                 var currentTotal = 0.0M;
-                var total = 0.0M;
-                var currentDate = strategy.Pnls.First().Date;
                 foreach (var pnl in strategy.Pnls)
                 {
-                    if (pnl.Date.Month != currentDate.Month)
-                    {
-                        total += currentTotal;
-
-                        if (pnlDict.ContainsKey(currentDate))
-                        {
-                            pnlDict[currentDate] = pnlDict[currentDate] + total;
-                        }
-                        else
-                        {
-                            pnlDict[currentDate] = total;
-                        }
-                        currentDate = pnl.Date;
-                        currentTotal = 0.0m;
-                    }
+                    var currentDate = pnl.Date;
                     currentTotal += pnl.Amount;
-                }
-                total += currentTotal;
-
-                if (pnlDict.ContainsKey(currentDate))
-                {
-                    pnlDict[currentDate] = pnlDict[currentDate] + total;
-                }
-                else
-                {
-                    pnlDict[currentDate] = total;
+                    pnlDict[currentDate] = currentTotal;
                 }
             }
             return pnlDict;
